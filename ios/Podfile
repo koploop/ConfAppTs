@@ -5,6 +5,17 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
+############ plugins ##################
+
+plugin 'cocoapods-repo-svn', :sources => [
+  'https://192.0.0.183/Control/TeleConference/trunk/components/iOS/Tool/HKPrivateSVNPods'
+]
+
+plugin 'cocoapods-art', :sources => [
+  'Cocoa-proxy',
+  'Cocoa-trans-local'
+]
+
 target 'ConfAppTs' do
   config = use_native_modules!
 
@@ -16,6 +27,8 @@ target 'ConfAppTs' do
 
   # 图标字体
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  
+  pod 'HKCommonCmp', '1.0.1'
 
   target 'ConfAppTsTests' do
     inherit! :complete
