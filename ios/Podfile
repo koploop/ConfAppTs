@@ -12,7 +12,7 @@ plugin 'cocoapods-repo-svn', :sources => [
 ]
 
 plugin 'cocoapods-art', :sources => [
-  'Cocoa-proxy',
+#  'Cocoa-proxy',
   'Cocoa-trans-local'
 ]
 
@@ -22,11 +22,17 @@ target 'ConfAppTs' do
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
-    :hermes_enabled => false
+    :hermes_enabled => true
+  )
+  
+  
+  # /node_modules/react-native/scripts/react_native_pods会读取这个值,如果不写就会用脚本默认的
+  # 这是参考上面👆🏻 use_react_native! 的写法
+  use_flipper!(
+    'Flipper' => '0.125.0',
   )
 
   # 图标字体
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   
   pod 'HKCommonCmp', '1.0.1'
 

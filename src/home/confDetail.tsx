@@ -48,7 +48,10 @@ const ConfDetail = ({ route, navigate }) => {
   useEffect(() => {
     _getDetail();
     _getMembers();
-    
+  }, [])
+
+  useEffect(() => {
+    _reloadSections();
   }, [detail, members])
 
   const handleComplete = (val: string) => {
@@ -60,8 +63,7 @@ const ConfDetail = ({ route, navigate }) => {
       'id': inParam.confId
     }).then(res => {
       setDetail(res.data);
-      // detail = res.data;
-      _reloadSections();
+      
     }).catch(e => {
       console.log(e);
       HUD.toast(e.msg);
@@ -73,8 +75,6 @@ const ConfDetail = ({ route, navigate }) => {
       'confId': inParam.confId
     }).then(res => {
       setMembers(res.data.list);
-      // members = res.data.list
-      _reloadSections();
     }).catch(e => {
       console.log(e);
       HUD.toast(e.msg);
@@ -158,7 +158,7 @@ const ConfDetail = ({ route, navigate }) => {
             {
               members.map((member, index) => {
                 return (
-                  <View style={styles.memberItem}>
+                  <View key={index} style={styles.memberItem}>
                     <Text style={{ fontSize: 15 }}>{member.name}</Text>
                   </View>
                 );
